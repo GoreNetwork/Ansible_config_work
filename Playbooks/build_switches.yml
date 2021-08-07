@@ -1,0 +1,12 @@
+---
+- name: Build Switches
+  hosts: switches
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: BUILD SWITCH CONFIGURATION
+    template:
+      src=/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2/
+      dest=/home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}.conf
+      # src=/etc/ansible/templates/base_{{switch_or_router}}.j2
+      # dest=/etc/ansible/output/{{hostname}}.conf

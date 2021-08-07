@@ -1,0 +1,4 @@
+vlan_names:
+  "1": access
+  "2": VIRL_ACCESS
+

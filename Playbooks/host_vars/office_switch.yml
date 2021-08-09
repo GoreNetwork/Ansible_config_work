@@ -12,3 +12,14 @@ trunk_interfaces:
  - 11
  - 14
 stp_priority: 32768
+
+ports: 
+  interface1: 
+    trunk: False
+    access_vlan: "{{ vlan_names.data_vlan }}"
+  interface2: 
+    trunk: True
+    access_vlan: "{{ vlan_names.data_vlan }}"
+  interface3: 
+    trunk: False
+    access_vlan: "{{ vlan_names.data_vlan }}"

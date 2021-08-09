@@ -1,4 +1,4 @@
 vlan_names:
-  "1": access
-  "2": VIRL_ACCESS
+  "data_vlan": 1
+  "voice_vlan": 2
 

@@ -4,9 +4,26 @@
   connection: local
   gather_facts: no
   tasks:
-  - name: BUILD SWITCH CONFIGURATION
+  # - name: BUILD SWITCH CONFIGURATION
+  #   template:
+  #     src=
+  #     dest=/home/dhimes/Ansible_config_work/Playbooks/output/test.conf
+  #     # src=/etc/ansible/templates/base_{{switch_or_router}}.j2
+  #     # dest=/etc/ansible/output/{{hostname}}.conf
+
+
+  - name: MAKE SURE NEEDED FOLDER EXISTS
+    file:
+      path: /home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}
+      state: directory
+
+
+  - name: "BUILD CONFIG SNIPPETS"
     template:
-      src=/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2/
-      dest=/home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}.conf
-      # src=/etc/ansible/templates/base_{{switch_or_router}}.j2
-      # dest=/etc/ansible/output/{{hostname}}.conf
+      src: "{{ item }}"
+      # src: "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
+      dest: "/home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}/{{ item | basename | splitext | first}}.cfg"
+
+    loop:
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/catalyst/3750g/24_ports.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"

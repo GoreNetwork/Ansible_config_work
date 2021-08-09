@@ -1,6 +1,6 @@
 ---
 - name: Build Switches
-  hosts: switches
+  hosts: routers
   connection: local
   gather_facts: no
   tasks:
@@ -25,5 +25,9 @@
       dest: "/home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}/{{ item | basename | splitext | first}}.cfg"
 
     loop:
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/catalyst/3750g/24_ports.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
+      # - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/catalyst/3750g/24_ports.j2"
+      # - "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/router_main.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/eigrp.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/routers/interfaces.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/acls.j2"

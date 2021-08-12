@@ -1,3 +1,4 @@
+{% if ports.interface1 is defined%}
 interface GigabitEthernet0/0
  ip address {{ports.interface1.ip_address}}
 {% if ports.interface1.acl_in  is defined %}
@@ -9,9 +10,9 @@ interface GigabitEthernet0/0
  duplex auto
  speed auto
  media-type rj45
-!
+!{%endif%}
 
-
+{% if ports.interface2 is defined%}
 interface GigabitEthernet0/1
  ip address {{ports.interface2.ip_address}}
  {% if ports.interface2.acl_in  is defined %}
@@ -23,8 +24,9 @@ interface GigabitEthernet0/1
  duplex auto
  speed auto
  media-type rj45
+!{%endif%}
 
-
+{% if ports.interface3 is defined%}
 interface GigabitEthernet0/2
  ip address {{ports.interface3.ip_address}}
  {% if ports.interface3.acl_in  is defined %}
@@ -36,8 +38,9 @@ interface GigabitEthernet0/2
  duplex auto
  speed auto
  media-type rj45
+!{%endif%}
 
- 
+{% if ports.interface4 is defined%}
 interface GigabitEthernet0/3
  ip address {{ports.interface4.ip_address}}
  {% if ports.interface4.acl_in  is defined %}
@@ -49,3 +52,4 @@ interface GigabitEthernet0/3
  duplex auto
  speed auto
  media-type rj45
+!{%endif%}

@@ -27,9 +27,13 @@
     loop:
       # - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/catalyst/3750g/24_ports.j2"
       # - "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/router_main.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/routers/interfaces.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/acls.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/aaa.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/l3_data.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/0_router_main.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/routers/50_interfaces.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/20_acls.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/30_aaa.j2"
+      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/40_l3_data.j2"
 
+  - name: Assemble from fragments from a directory
+    ansible.builtin.assemble:
+      src: /home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}/
+      dest: /home/dhimes/Ansible_config_work/Playbooks/final_output/{{hostname}}.cfg

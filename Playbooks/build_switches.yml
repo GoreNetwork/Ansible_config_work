@@ -4,36 +4,27 @@
   connection: local
   gather_facts: no
   tasks:
-  # - name: BUILD SWITCH CONFIGURATION
-  #   template:
-  #     src=
-  #     dest=/home/dhimes/Ansible_config_work/Playbooks/output/test.conf
-  #     # src=/etc/ansible/templates/base_{{switch_or_router}}.j2
-  #     # dest=/etc/ansible/output/{{hostname}}.conf
 
+  - name: REMOVE EXISTING FILES
+    file:
+      path: /home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}
+      state: absent
 
   - name: MAKE SURE NEEDED FOLDER EXISTS
     file:
       path: /home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}
       state: directory
 
-
   - name: "BUILD CONFIG SNIPPETS"
     template:
-      src: "{{ item }}"
-      # src: "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
-      dest: "/home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}/{{ item | basename | splitext | first}}.cfg"
+      src: "{{item.file}}"
+      dest: "{{output_folder}}/{{item.order}}_{{ item.file | basename | splitext | first}}.cfg"
+    loop: "{{build_order}}"
 
-    loop:
-      # - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/catalyst/3750g/24_ports.j2"
-      # - "/home/dhimes/Ansible_config_work/Playbooks/templates/switch_main.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/0_router_main.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/routers/50_interfaces.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/20_acls.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/30_aaa.j2"
-      - "/home/dhimes/Ansible_config_work/Playbooks/templates/ios/40_l3_data.j2"
 
-  - name: Assemble from fragments from a directory
+
+
+  - name: Build_config
     ansible.builtin.assemble:
-      src: /home/dhimes/Ansible_config_work/Playbooks/output/{{hostname}}/
-      dest: /home/dhimes/Ansible_config_work/Playbooks/final_output/{{hostname}}.cfg
+      src: "{{output_folder}}"
+      dest: "/home/dhimes/Ansible_config_work/Playbooks/final_output/{{hostname}}.cfg"

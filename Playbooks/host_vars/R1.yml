@@ -1,10 +1,14 @@
 ---
 hostname: R1
-ansible_host: 10.0.0.1
+managment_ip: 10.0.0.1
+managment_snm: 255.255.255.255
 device_type: vios
 need_dfgw: True
 default_gateway: 192.168.0.1
 eigrp: True
+router_switch: router
+device_type: ios
+
 
 ports: 
   interface1: 
